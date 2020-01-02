@@ -26,7 +26,7 @@
     <!--<cas.applicatiionServerDownloadUrl>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.20/bin/apache-tomcat-6.0.20.zip</cas.applicatiionServerDownloadUrl>-->
     <cas.applicatiionServerDownloadUrl>http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.24/bin/apache-tomcat-8.0.24.zip</cas.applicatiionServerDownloadUrl>
 
-    <springframework.core.release>3.0.5.RELEASE</springframework.core.release>
+    <springframework.core.release>5.2.1.RELEASE</springframework.core.release>
     <screen.product.info>CAS ${version}</screen.product.info>
   </properties>
 
