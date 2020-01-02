@@ -23,7 +23,7 @@
     <spring.webflow.version>2.3.2.RELEASE</spring.webflow.version>
     <spring.version>3.2.9.RELEASE</spring.version>
     <ldaptive.version>1.0.6</ldaptive.version>
-    <spring.security.version>3.2.0.RELEASE</spring.security.version>
+    <spring.security.version>5.2.1.RELEASE</spring.security.version>
     <clover.version>2.6.3</clover.version>
     <aspectj.version>1.7.2</aspectj.version>
     <javax.validation.version>1.0.0.GA</javax.validation.version>
