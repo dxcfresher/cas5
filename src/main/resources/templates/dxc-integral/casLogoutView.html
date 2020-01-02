@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" th:href="@{${#themes.code('standard.custom.css.file')}}"/>
+<script type="text/javascript" src="js/common_rosters.js"></script>
+<link rel="icon" href="/cas/favicon.ico" type="image/x-icon" />
+</head>
+<body id="cas" onload="init();">
+<div id="page">
+<div id="header">
+</div>
+<div id="content">
+<div id="msg" class="success">
+<h2 th:utext="#{screen.logout.header}">Logout successful 1234</h2> 
+<p th:utext="#{screen.logout.success}">You have successfully logged out of the Central Authentication Service.</p>
+<p th:utext="#{screen.logout.security}">For security reasons, exit your web browser.</p>
+</div>
+</div>
+<div id="footer">
+</div>
+</body>
+</html>

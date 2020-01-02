@@ -1,0 +1,101 @@
+<div class="box" id="login">
+    <form method="post" id="fm1" class="fm-v clearfix" th:object="${credential}">
+        <section class="row">
+            <label for="username" th:utext="#{screen.welcome.label.netid}"/>
+
+            <div th:if="${openIdLocalId}">
+                <strong>
+                    <span th:utext="${openIdLocalId}"/>
+                </strong>
+                <input type="hidden"
+                       id="username"
+                       name="username"
+                       th:value="${openIdLocalId}"/>
+            </div>
+            <div th:unless="${openIdLocalId}">
+                <input class="required"
+                       id="username"
+                       size="25"
+                       tabindex="1"
+                       type="text"
+                       th:disabled="${guaEnabled}"
+                       th:field="*{username}"
+                       th:accesskey="#{screen.welcome.label.netid.accesskey}"
+                       autocomplete="off"/>
+            </div>
+        </section>
+
+        <section class="row">
+            <label for="password" th:utext="#{screen.welcome.label.password}"/>
+            
+            <div>
+                <input class="required"
+                       type="password"
+                       id="password"
+                       size="25"
+                       tabindex="2"
+                       th:accesskey="#{screen.welcome.label.password.accesskey}"
+                       th:field="*{password}"
+                       autocomplete="off"/>
+                <span id="capslock-on" style="display:none;">
+                    <p>
+                        <i class="fa fa-exclamation-circle"></i>
+                        <span th:utext="#{screen.capslock.on}"/>
+                    </p>
+                </span>
+            </div>
+        </section>
+		
+        <section class="row">
+            <p th:if="${rememberMeAuthenticationEnabled}">
+                <input type="checkbox" name="rememberMe" id="rememberMe" value="true" tabindex="5"  />
+                <label for="rememberMe" th:text="#{screen.rememberme.checkbox.title}"/>
+            </p>
+        </section>
+        
+        <section class="row" th:if="${recaptchaSiteKey}">
+            <div class="g-recaptcha" th:attr="data-sitekey=${recaptchaSiteKey}"/>
+        </section>
+
+        <section class="row btn-row">
+            <input type="hidden" name="execution" th:value="${flowExecutionKey}"/>
+            <input type="hidden" name="_eventId" value="submit"/>
+            <input type="hidden" name="geolocation"/>				   
+			<input id="loginId" type="image" class="btn-submit" style="border:0; padding-left:5px;" src="/cas/themes/dxc-integral/images/dxc/btn_login.png"
+				border="0" onMouseOver="changeMouseover(this)" onMouseOut="changeMouseout(this)" />
+        </section>
+		
+		<section class="row">
+			<a href="/cas/pms">Password Management</a>
+		</section>
+    </form>
+    
+    <script type="text/javascript" th:inline="javascript">
+        var i = [[#{screen.welcome.button.loginwip}]]
+        $("#fm1").submit(function() {
+            $(":submit").attr("disabled", true);
+            $(":submit").attr("value", i);
+            return true;
+        });
+    </script>
+	
+	<Script language="javascript" type="text/javascript">
+		function changeMouseover(thi){
+			var sorce=thi.src;
+				if(sorce.indexOf("_after")==-1){
+				var img1 = new Image();
+				img1.src=sorce.replace(".png","_hover.png");
+				eval(thi.src=img1.src);
+			}
+		}
+		function changeMouseout(thi){
+			var sorce=thi.src;
+			if(sorce.indexOf("_after")==-1){
+			var img1 = new Image();
+			img1.src=sorce.replace("_hover.png",".png");
+			eval(thi.src=img1.src);
+		}
+	}
+	</Script>
+    <div th:replace="fragments/loginsidebar"/>
+</div>

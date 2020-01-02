@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.dxc.cas</groupId>
+  <artifactId>libs</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0</version>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-install-plugin</artifactId>       		
+		<executions>			  
+		  <execution>
+			<id>ojdbc7</id>
+			<phase>install</phase>
+			<goals>
+			  <goal>install-file</goal>
+			</goals>
+			<configuration>
+			  <groupId>com.oracle</groupId>
+			  <artifactId>ojdbc7</artifactId>
+			  <packaging>jar</packaging>
+			  <version>12.1.0.2</version>
+			  <file>${basedir}/jars/ojdbc7-12.1.0.2.jar</file>
+			</configuration>
+		  </execution>
+		  
+		  <execution>
+			<id>sqljdbc</id>
+			<phase>install</phase>
+			<goals>
+			  <goal>install-file</goal>
+			</goals>
+			<configuration>
+			  <groupId>com.microsoft</groupId>
+			  <artifactId>sqljdbc</artifactId>
+			  <packaging>jar</packaging>
+			  <version>4.2</version>
+			  <file>${basedir}/jars/sqljdbc-4.2.jar</file>
+			</configuration>
+		  </execution>
+		</executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
