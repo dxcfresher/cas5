@@ -6,4 +6,3 @@
 		</div>
 <jsp:directive.include file="includes/bottom.jsp" />
 
-

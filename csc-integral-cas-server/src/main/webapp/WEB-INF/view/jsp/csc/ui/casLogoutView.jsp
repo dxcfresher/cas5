@@ -4,8 +4,8 @@
 			<h2><spring:message code="screen.logout.header" /></h2>
 
 			<p><spring:message code="screen.logout.success" /></p>
-			<p><spring:message code="screen.logout.security" /></p>			
-			<a href='<%= request.getParameter("service") %>' style="text-decoration: none">Login again</a> <!-- ICAS-19 --> <!-- ICAS-20 -->
+			<p><spring:message code="screen.logout.security" /></p>
+			
 			<%--
 			 Implementation of support for the "url" parameter to logout as recommended in CAS spec section 2.3.1.
 			 A service sending a user to CAS for logout can specify this parameter to suggest that we offer
@@ -17,8 +17,4 @@
 			</p>
 			</c:if>
 		</div>
-<!-- IJTI-662-->
-<%
-response.addHeader("X-Frame-Options", "DENY");
-%>
 <jsp:directive.include file="includes/bottom.jsp" />

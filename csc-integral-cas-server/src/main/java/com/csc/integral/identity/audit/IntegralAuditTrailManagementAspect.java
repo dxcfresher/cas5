@@ -173,7 +173,7 @@ public class IntegralAuditTrailManagementAspect {
                     currentPrincipal, auditableResource, action,
                     myApplicationCode, actionDate, clientInfo
                             .getClientIpAddress(), clientInfo
-                            .getServerIpAddress(), null);
+                            .getServerIpAddress());
             // Finally record the audit trail info
             for (AuditTrailManager manager : auditTrailManagers) {
                 manager.record(auditContext);

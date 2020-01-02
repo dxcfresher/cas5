@@ -32,7 +32,7 @@ public class MailAgent {
 
 	private String templateLocation = null;
 
-	private Map<String, Object> data = null;
+	private Map<?, ?> data = null;
 
 	public MailAgent(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
@@ -76,10 +76,10 @@ public class MailAgent {
 					message.setBcc((String[])ArrayUtils.addAll(mailMessage.getBcc(), templateMailMessage.getBcc()));
 					if (templateLocation != null) {
 						if (data == null) {
-							data = new HashMap<String, Object>();
+							data = new HashMap<Object, Object>();
 						}
 						String text = VelocityEngineUtils.mergeTemplateIntoString(
-								velocityEngine, templateLocation, "utf-8", data);												
+								velocityEngine, templateLocation, data);
 						message.setText(text, true);
 					}
 				}
@@ -110,7 +110,7 @@ public class MailAgent {
 		return data;
 	}
 
-	public void setData(Map<String, Object> data) {
+	public void setData(Map<?, ?> data) {
 		this.data = data;
 	}
 

@@ -4,7 +4,7 @@
 .footer {
   color: #434343;
   font-weight: bold;
-  position: positive;
+  position: relative;
   bottom: 30px;
   text-align: center;
   font-size: 0.9em;

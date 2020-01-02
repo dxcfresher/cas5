@@ -3,4 +3,4 @@
 <%@ taglib prefix="form"    uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring"  uri="http://www.springframework.org/tags" %>
 <fmt:setLocale value="${locale}" />
-<c:set var="currentuser" value="<%=request.getRemoteUser()%>" ></c:set>
+<c:set var="currentuser" value="<%=((HttpServletRequestWrapper) request).getRemoteUser()%>" ></c:set>

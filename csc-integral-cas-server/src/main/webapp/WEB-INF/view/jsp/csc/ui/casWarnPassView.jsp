@@ -17,7 +17,7 @@
   </p>
   <input type="hidden" id="userName" name="userName" value="<%= request.getParameter("userName") %>" />  
   <p>
-  <spring:message code="screen.warnpass.message.line2" arguments="${fn:escapeXml(param.service)}${fn:indexOf(param.service, '?') eq -1 ? '?' : '&'}ticket=${serviceTicketId}" />
+  <spring:message code="screen.warnpass.message.line2" arguments="${redirectUrl}" />
   </p>
 </div>
 <jsp:directive.include file="includes/bottom.jsp" />

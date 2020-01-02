@@ -1,0 +1,51 @@
+===============================================================================
+		  RELEASE NOTES - CSC INTEGRAL CAS - Version 2.1
+===============================================================================
+Bug Fixes/Changes
+-----------
+#5916 : [CAS] css file path not resolveable
+#6003 : [CAS] Restrict password reset function to only system user
+
+===============================================================================
+		  RELEASE NOTES - CSC INTEGRAL CAS - Version 2.0
+===============================================================================
+Bug Fixes/Changes
+-----------
+#5592: [CAS] Support Spanish
+#5734: Login Page field label not in Spanish (#5592 covered it)
+
+===============================================================================
+		  RELEASE NOTES - CSC INTEGRAL CAS - Version 1.1.3
+===============================================================================
+Bug Fixes/Changes
+-----------
+#2658: Remove profile duplications in CAS pom.xml
+#2669: Update Apache "DTD Tiles Configuration 2.0" to run without the Internet
+#2694: Implement CAS Localization for service pages
+#2714: Implement common CAS client filters
+#2834: [BnD] Lack of migrating certificate file for CAS
+#2835: [CAS] Utilize Apache Tomcat Native library on Linux/Solaris for performance-wise
+#3148: Resolve library conflict on csc-integral-identity
+#3157: Apply CAS client common filter to Portal and Workflow
+
+===============================================================================
+		  RELEASE NOTES - CSC INTEGRAL CAS - Version 1.1.2
+===============================================================================
+Enhancement
+-----------
+#2506: Security for CAS application
+
+===============================================================================
+		  RELEASE NOTES - CSC INTEGRAL CAS - Version 1.1.1
+===============================================================================
+#2322: Password Warning Check - Design Enhancement
+#2466: Separate Admin from normal users in OpenLDAP
+
+===============================================================================
+		  RELEASE NOTES - CSC INTEGRAL CAS - Version 1.1
+===============================================================================
+#1542: [CAS] Password Change integration
+#1611: [Integral] Implement Password Reset on CAS
+#1612: [Integral] Upgrade CAS server webapp to 3.4.5
+#1628: [Integral] Integrate CAS webflow with LDAP Password Policy
+#2322: Password Warning Check - Design Enhancement 

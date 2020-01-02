@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.csc.integral.cas</groupId>
     <artifactId>cas-parent-pom</artifactId>
-    <version>4.0.4-SNAPSHOT</version>
+    <version>1.1.3-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -47,21 +47,6 @@
               <packaging>jar</packaging>
               <version>3.0.1</version>
               <file>${basedir}/libs/csc-integral-installer-3.0.1.jar</file>
-            </configuration>
-          </execution>
-		  
-		  <execution>
-            <id>cas-server-support-ldap</id>
-            <phase>install</phase>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-            <configuration>
-              <groupId>com.csc.integral</groupId>
-              <artifactId>cas-server-support-ldap</artifactId>
-              <packaging>jar</packaging>
-              <version>4.0.4</version>
-              <file>${basedir}/libs/cas-server-support-ldap-4.0.4.jar</file>
             </configuration>
           </execution>
 

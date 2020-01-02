@@ -10,7 +10,7 @@
     #header h1#app-name {clear:both; padding:0 0 0 25px; background:#210f7a; color:#fff; font:normal 400 2.8em/2.5em Georgia,"Times New Roman", serif;} /* d21033 */
 
 /* CONTENT --------------------------------- */
-#content {background: url("../images/csc/logon_NEW.jpg") no-repeat top right; padding:0; margin: 80px 0 0 0; width:680px; height:480px;}
+#content {background: url("../images/csc/logon-integral.png") no-repeat top right; padding:0; margin: 80px 0 0 0; width:680px; height:680px;}
     #content h2 {margin:0 0 .5em 0; font-size:1.3em; font-weight:400; color:#000; xborder-bottom:1px solid #eee; padding:3px 0; xletter-spacing:-1px;}
     #content h3 {font:1em arial, helvetica, sans-serif; font-weight:400;}
     #content p {line-height:1.5; font-size:1.1em; padding:0 0 18px;}
@@ -24,9 +24,9 @@
     #footer div {clear:left; margin:1em 5px .5em; overflow:hidden;}
 
 /* MESSAGES --------------------------------- */
-.info, .success {margin: 30px 27px 0px 23px; padding:20px 20px 20px 100px; font-size:12px; line-height:1.5;} /* ICAS-18 */
+.info, .errors, .success {margin: 30px 27px 0px 23px; padding:20px 20px 20px 100px; font-size:12px; line-height:1.5;}
 .info {position:relative; top:360px; border:1px dotted 008; background:#eff url(../images/info.gif) no-repeat 20px 18px; color:#008;}
-.errors {margin: 30px 27px 0px 23px; padding:20px 20px 40px 100px; font-size:12px; line-height:1.5; position:relative; top:200px; border:1px dotted #d21033; background:#fed url(../images/error.gif) no-repeat 20px 18px; color:#d21033;} /* ICAS-18 */
+.errors {position:relative; top:280px; border:1px dotted #d21033; background:#fed url(../images/error.gif) no-repeat 20px 18px; color:#d21033; padding-bottom: 40px;}
 .success {position:relative; top:360px; border:1px dotted #390; background:#dfa url(../images/confirm.gif) no-repeat 20px 18px; color:#390;}
     #content .errors h2, #content .success h2 {font-family:Georgia,"Times New Roman",Times,serif; font-size:18px; line-height:48px; font-weight:400; margin:0 18px 0 0; padding:0;}
     #content .success h2 {color: #008 !important;}
@@ -62,7 +62,7 @@ float:left;
 }
 input.btn-submit {border-width:2px;}
 
-/*.fm-v div.row {float:left; margin:0; padding:.5em 0; width:100%;}*/ /* ICAS-18 */
+.fm-v div.row {float:left; margin:0; padding:.5em 0; width:100%;}
 .fm-v div.row label {float:left; width:100%; line-height:1.5;}
 .fm-v div.row input.btn-submit {display:block; margin:0;}
 

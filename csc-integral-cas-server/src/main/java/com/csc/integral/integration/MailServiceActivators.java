@@ -26,7 +26,7 @@ public class MailServiceActivators {
     	logger.info("password reset");
     	SimpleMailMessage mailMessage = new SimpleMailMessage();
     	mailMessage.setTo(user.getEmail());
-		HashMap<String, Object> data = new HashMap<String, Object>();
+		HashMap<String, User> data = new HashMap<String, User>();
 		data.put("user", user);
 		resetPasswordMailAgent.setData(data);
 		resetPasswordMailAgent.send(mailMessage);

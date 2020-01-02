@@ -9,8 +9,10 @@
   <!--              Abstract definitions                          -->
   <!-- =========================================================  -->
   <definition name="common" template="/WEB-INF/view/tiles/template/standardLayout.jsp">
-    <put-attribute name="header" value="/WEB-INF/view/tiles/include/header.jsp" />
-    <put-attribute name="sidebar" value="/WEB-INF/view/tiles/include/sidebar.jsp" />
+    <put-attribute name="logo" value="/WEB-INF/view/tiles/include/logo.jsp" />
+    <put-attribute name="links" value="/WEB-INF/view/tiles/include/links.jsp" />
+    <put-attribute name="quicklinks" value="/WEB-INF/view/tiles/include/quicklinks.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/tiles/include/footer.jsp" />
   </definition>
 
   <!-- =========================================================  -->

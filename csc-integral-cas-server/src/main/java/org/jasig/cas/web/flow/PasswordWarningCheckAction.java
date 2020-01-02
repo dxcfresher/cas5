@@ -1,10 +1,9 @@
 package org.jasig.cas.web.flow;
 
-import java.util.Iterator;
-import java.util.Map;
-
-import org.jasig.cas.authentication.UsernamePasswordCredential;
+import org.jasig.cas.authentication.principal.UsernamePasswordCredentials;
 import org.jasig.cas.web.support.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.webflow.action.AbstractAction;
 import org.springframework.webflow.execution.Event;
@@ -32,16 +31,10 @@ public final class PasswordWarningCheckAction extends AbstractAction implements 
         this.logger.debug("checking account status--");
 
         // Sanity check for user validity and service ticket
-        //UsernamePasswordCredential credentials = (UsernamePasswordCredential) context
-        //        .getFlowScope().get("credentials");
-        //String userId = credentials != null ? credentials.getUsername() : null;
-        
-        String userId = WebUtils.getHttpServletRequest(context).getParameter("username");
-        this.logger.debug("userId='" + userId + "'");
-        
-        
+        UsernamePasswordCredentials credentials = (UsernamePasswordCredentials) context
+                .getFlowScope().get("credentials");
+        String userId = credentials != null ? credentials.getUsername() : null;
         String ticket = WebUtils.getTicketGrantingTicketId(context);
-        
         if ((userId == null) && (ticket == null)) {
             this.logger.warn("No user principal or service ticket available!");
             return error();
@@ -51,11 +44,13 @@ public final class PasswordWarningCheckAction extends AbstractAction implements 
             this.logger.info("Not a login attempt, skipping PasswordWarnCheck");
             return success();
         }
-       
+
+        this.logger.debug("userID='" + userId + "'");
+
         // Check for password expiration
         UserPasswordAttributes pwdAttrs = identityService.getPasswordAttributes(userId);
         int pwdRemainingDays = pwdAttrs.getDaysBeforeExpiration();
-        this.logger.debug("userId='" + userId + "' - pwdRemainingDays: " + pwdRemainingDays + " - pwdWarningDays: " + pwdWarningDays);
+
         if (pwdRemainingDays <= pwdWarningDays) {
             this.logger.debug("password for '" + userId + "' is expiring in " + pwdRemainingDays
                     + " days. Sending the warning page.");
