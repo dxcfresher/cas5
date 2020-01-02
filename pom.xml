@@ -1,191 +1,340 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd ">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.dxc.cas</groupId>
+    <artifactId>cas-overlay</artifactId>
+    <packaging>war</packaging>
+    <version>1.0</version>
 
-  <modelVersion>4.0.0</modelVersion>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.rimerosolutions.maven.plugins</groupId>
+                <artifactId>wrapper-maven-plugin</artifactId>
+                <version>0.0.4</version>
+                <configuration>
+                    <verifyDownload>true</verifyDownload>
+                    <checksumAlgorithm>MD5</checksumAlgorithm>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
+                <configuration>
+                    <mainClass>org.springframework.boot.loader.WarLauncher</mainClass>
+                    <addResources>true</addResources>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <warName>cas</warName>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <recompressZippedFiles>false</recompressZippedFiles>
+                    <archive>
+                        <compress>false</compress>
+                        <manifestFile>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp${app.server}/META-INF/MANIFEST.MF
+                        </manifestFile>
+                    </archive>
+                    <overlays>
+                        <overlay>
+                            <groupId>org.apereo.cas</groupId>
+                            <artifactId>cas-server-webapp${app.server}</artifactId>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+            </plugin>
+        </plugins>
+        <finalName>cas</finalName>
+    </build>
 
-  <groupId>com.csc.integral.cas</groupId>
-  <artifactId>cas-parent-pom</artifactId>
-  <version>1.1.3-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-webapp${app.server}</artifactId>
+            <version>${cas.version}</version>
+            <type>war</type>
+            <scope>runtime</scope>
+        </dependency>
+		
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-ldap</artifactId>
+			<version>${cas.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-json-service-registry</artifactId>
+			<version>${cas.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-core-configuration</artifactId>
+			<version>${cas.version}</version>
+		</dependency>
+		
+		<dependency>
+		   <groupId>org.apereo.cas</groupId>
+		   <artifactId>cas-server-support-jdbc-drivers</artifactId>
+		   <version>${cas.version}</version>
+		</dependency>
 
-  <packaging>pom</packaging>
-  <name>cas</name>
+		<dependency>
+		   <groupId>org.apereo.cas</groupId>
+		   <artifactId>cas-server-support-jpa-ticket-registry</artifactId>
+		   <version>${cas.version}</version>
+		</dependency>
+				
+		<!-- Spring Security Managed Dependencies -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-cas</artifactId>
+			<version>3.2.0.RELEASE</version>
+			<exclusions>
+			  <exclusion>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+			  </exclusion>
+			</exclusions>
+		</dependency>
 
-  <modules>
-    <module>csc-integral-common</module>
-    <module>csc-integral-cas-server</module>
-  </modules>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
 
-  <properties>
-    <main.basedir>${project.parent.basedir}</main.basedir>
-    <checkstyle.skip>true</checkstyle.skip>
-    <findbugs.skip>true</findbugs.skip>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
 
-    <passwordhistory.database.driverClass>oracle.jdbc.OracleDriver</passwordhistory.database.driverClass>
-    <passwordhistory.database.url>jdbc:oracle:thin:@csclfsvnm203:1521:PLGDB02</passwordhistory.database.url>
-    <passwordhistory.database.user>vm1dta</passwordhistory.database.user>
-    <passwordhistory.database.password>vm1dta12#$</passwordhistory.database.password>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.2.1.RELEASE</version>
+			<exclusions>
+			  <exclusion>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+			  </exclusion>
+			</exclusions>
+		</dependency>
+	  
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-core</artifactId>
+			<version>3.0.4.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.ldap</groupId>
+			<artifactId>spring-ldap-core</artifactId>
+			<version>2.0.2.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.ldap</groupId>
+			<artifactId>spring-ldap-core-tiger</artifactId>
+			<version>2.0.2.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.github.inspektr</groupId>
+			<artifactId>inspektr-audit</artifactId>
+			<version>1.0.7.GA</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.github.inspektr</groupId>
+			<artifactId>inspektr-common</artifactId>
+			<version>1.0.7.GA</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.github.inspektr</groupId>
+			<artifactId>inspektr-support-spring</artifactId>
+			<version>1.0.7.GA</version>
+		</dependency>
 
-    <passwordgenerator.enable>true</passwordgenerator.enable>
-    <passwordgenerator.maxTry>2000</passwordgenerator.maxTry>
-    <passwordgenerator.length>16</passwordgenerator.length>
+		<dependency>
+			<groupId>commons-jexl</groupId>
+			<artifactId>commons-jexl</artifactId>
+			<version>1.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>			
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>12.1.0.2</version>
+		</dependency>
 
-    <passwordcheck.enable>true</passwordcheck.enable>
-    <passwordcheck.length>8</passwordcheck.length>
-    <passwordcheck.hasNumeric>true</passwordcheck.hasNumeric>
-    <passwordcheck.hasUpperCase>false</passwordcheck.hasUpperCase>
-    <passwordcheck.hasLowerCase>false</passwordcheck.hasLowerCase>
-    <passwordcheck.hasSymbol>false</passwordcheck.hasSymbol>
-    <passwordcheck.hasDifferentSymbols>false</passwordcheck.hasDifferentSymbols>
-    <passwordcheck.differentSymbols>5</passwordcheck.differentSymbols>
-    <passwordcheck.hasDifferentNumbers>true</passwordcheck.hasDifferentNumbers>
-    <passwordcheck.differentNumbers>5</passwordcheck.differentNumbers>
-    <passwordcheck.hasDifferentLetters>true</passwordcheck.hasDifferentLetters>
-    <passwordcheck.differentLetters>5</passwordcheck.differentLetters>
+		<dependency>
+			<groupId>com.microsoft</groupId>
+			<artifactId>sqljdbc</artifactId>
+			<version>4.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.api.version}</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.5</version>
+			<exclusions>
+			<!-- provided by cas-server-webapp overlay -->
+			<exclusion>
+			  <groupId>commons-collections</groupId>
+			  <artifactId>commons-collections</artifactId>
+			</exclusion>
+			</exclusions>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
 
-    <ldap.filter>cn=%u,ou=users,ou=portal,dc=dolphin,dc=com</ldap.filter>
-    <ldap.login>cn=Admin,dc=dolphin,dc=com</ldap.login>
-    <ldap.password>root</ldap.password>
-    <ldap.password.daysBeforeExpirationWarning>7</ldap.password.daysBeforeExpirationWarning>
-    <ldap.base.users>ou=users,ou=portal,dc=dolphin,dc=com</ldap.base.users>
-    <ldap.base.ppolicy>ou=ppolicy,dc=dolphin,dc=com</ldap.base.ppolicy>
-    <ldap.ppolicy.default.cn>default</ldap.ppolicy.default.cn>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+			<type>jar</type>
+			<exclusions>
+				<exclusion>
+				  <groupId>log4j</groupId>
+				  <artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-    <systemUser.list>gng,underwr1,underwr2,underwr3,stang20,root</systemUser.list>
-    
-    <inspektr.database.driverClass>oracle.jdbc.OracleDriver</inspektr.database.driverClass>
-    <inspektr.database.url>jdbc:oracle:thin:@csclfsvnm203:1521:PLGDB02</inspektr.database.url>
-    <inspektr.database.user>vm1dta</inspektr.database.user>
-    <inspektr.database.password>vm1dta12#$</inspektr.database.password>
-  </properties>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+  
+    </dependencies>
 
-  <profiles>
+    <properties>
+        <cas.version>5.1.4</cas.version>
+        <springboot.version>1.5.3.RELEASE</springboot.version>
+        <!-- app.server could be -jetty, -undertow, -tomcat, or blank if you plan to provide appserver -->
+        <app.server>-tomcat</app.server> 
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<servlet.api.version>2.5</servlet.api.version>
+		<commons.lang.version>3.5</commons.lang.version>
+		<slf4j.version>1.7.5</slf4j.version>
+    </properties>
 
-    <profile>
-      <id>local</id>
+    <repositories>
+        <repository>
+            <id>sonatype-releases</id>
+            <url>http://oss.sonatype.org/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>shibboleth-releases</id>
+            <url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
 
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-
-      <properties>
-        <ldap.url>ldap://CSCVIEAE742289:389</ldap.url>
-        <ldap.password.daysBeforeExpirationWarning>3</ldap.password.daysBeforeExpirationWarning>
-        <cas.host.name>CSCVIEAE742289</cas.host.name>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>csclfsvnm001</id>
-
-      <properties>
-        <ldap.url>ldap://csclfsvnm001:389</ldap.url>
-        <cas.host.name>csclfsvnm001</cas.host.name>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>CSCVIEAH767820</id>
-
-      <properties>
-        <ldap.url>ldap://CSCVIEAH767820:389</ldap.url>
-        <cas.host.name>CSCVIEAH767820</cas.host.name>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>cscsfschn001</id>
-
-      <properties>
-        <ldap.url>ldap://cscsfschn001:389</ldap.url>
-        <cas.host.name>cscsfschn001</cas.host.name>
-        <inspektr.database.driverClass>com.mysql.jdbc.Driver</inspektr.database.driverClass>
-        <inspektr.database.url>jdbc:mysql://localhost:3306/cas</inspektr.database.url>
-        <inspektr.database.user>root</inspektr.database.user>
-        <inspektr.database.password>root</inspektr.database.password>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>cscdfssgp001</id>
-
-      <properties>
-        <ldap.url>ldap://cscdfssgp001:389</ldap.url>
-        <cas.host.name>cscdfssgp001</cas.host.name>
-        <inspektr.database.driverClass>com.mysql.jdbc.Driver</inspektr.database.driverClass>
-        <inspektr.database.url>jdbc:mysql://localhost:3306/cas</inspektr.database.url>
-        <inspektr.database.user>root</inspektr.database.user>
-        <inspektr.database.password>root</inspektr.database.password>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>marco</id>
-
-      <properties>
-        <ldap.url>ldap://marco:389</ldap.url>
-        <cas.host.name>marco</cas.host.name>
-        <inspektr.database.driverClass>com.mysql.jdbc.Driver</inspektr.database.driverClass>
-        <inspektr.database.url>jdbc:mysql://localhost:3306/cas</inspektr.database.url>
-        <inspektr.database.user>root</inspektr.database.user>
-        <inspektr.database.password>root</inspektr.database.password>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>weblogiczone</id>
-
-      <properties>
-        <ldap.url>ldap://weblogiczone:389</ldap.url>
-        <cas.host.name>marco</cas.host.name>
-        <inspektr.database.driverClass>com.mysql.jdbc.Driver</inspektr.database.driverClass>
-        <inspektr.database.url>jdbc:mysql://localhost:3306/cas</inspektr.database.url>
-        <inspektr.database.user>root</inspektr.database.user>
-        <inspektr.database.password>root</inspektr.database.password>
-      </properties>
-    </profile>
-
-  </profiles>
-
-  <scm>
-    <connection>scm:svn:svn://cscbjlnx01/INTEGRAL/BASE/Trunk/CAS</connection>
-  </scm>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.2</version>
-        <configuration>
-          <scmCommentPrefix>Ticket #0000: </scmCommentPrefix>
-          <preparationGoals>compile</preparationGoals>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <tagBase>svn://cscbjlnx01/INTEGRAL/BASE/Tags</tagBase>
-          <tagNameFormat>CAS-${project.version}</tagNameFormat>
-          <providerImplementations>
-            <svn>javasvn</svn>
-          </providerImplementations>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>com.google.code.maven-scm-provider-svnjava</groupId>
-            <artifactId>maven-scm-provider-svnjava</artifactId>
-            <version>1.13</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-scm-plugin</artifactId>
-        <version>1.5</version>
-        <configuration>
-          <connectionType>connection</connectionType>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <id>pgp</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.s4u.plugins</groupId>
+                        <artifactId>pgpverify-maven-plugin</artifactId>
+                        <version>1.1.0</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <pgpKeyServer>hkp://pool.sks-keyservers.net</pgpKeyServer>
+                            <pgpKeysCachePath>${settings.localRepository}/pgpkeys-cache</pgpKeysCachePath>
+                            <scope>test</scope>
+                            <verifyPomFiles>true</verifyPomFiles>
+                            <failNoSignature>false</failNoSignature>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
