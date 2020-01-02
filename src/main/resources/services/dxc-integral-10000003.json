@@ -1,9 +1,0 @@
-{
-  "@class" : "org.apereo.cas.services.RegexRegisteredService",
-  "serviceId" : "^(http|https|imaps)://.*",
-  "name" : "dxc-integral",
-  "theme" : "dxc-integral",
-  "id" : 10000003,
-  "description" : "dxc integral service",
-  "evaluationOrder" : 1
-}
